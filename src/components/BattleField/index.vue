@@ -3,27 +3,27 @@
     <div class="battlefield">
       <div class="p-row half-height">
         <div class="p-col p-col--6">
-          <status-bar name="Gengar" level="85" :health="22" gender="male"></status-bar>
+          <status-bar :name="cpuPokemon.name" :level="cpuPokemon.level" :health="60" gender="female"></status-bar>
         </div>
         <div class="p-col p-col--6 end">
           <pokemon
-            sprite="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png"
+            :sprite="cpuPokemon.sprites.front_default"
           ></pokemon>
         </div>
       </div>
       <div class="p-row half-height">
         <div class="p-col p-col--6 order1 end">
-          <status-bar name="Pikachu" level="79" :health="60" gender="female"></status-bar>
+          <status-bar :name="userPokemon.name" :level="userPokemon.level" :health="60" gender="female"></status-bar>
         </div>
         <div class="p-col p-col--6 end">
           <pokemon
-            sprite="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/25.png"
+            :sprite="userPokemon.sprites.back_default"
           ></pokemon>
-          {{pokemon}}
+          <!-- <div v-for="move in movesAtLevel(userPokemon)" :key="move.move.name">{{ move.move.name }}</div> -->
         </div>
       </div>
     </div>
-    <toolbar></toolbar>
+    <toolbar :moves="movesAtLevel(userPokemon)"></toolbar>
   </div>
 </template>
 
@@ -34,10 +34,11 @@ import Toolbar from "@/components/Toolbar/index";
 import { fetchPokemon } from "@/api/index";
 
 export default {
-  name: "BattleField",
+  name: 'BattleField',
   data() {
     return {
-      pokemon: ""
+      userPokemon: '',
+      cpuPokemon: ''
     };
   },
   components: {
@@ -46,11 +47,32 @@ export default {
     Toolbar
   },
   created() {
-    this.getPokemon("pikachu");
+    this.getUserPokemon('pikachu', 30);
+    this.getCpuPokemon('eevee', 28);
   },
   methods: {
-    getPokemon(id) {
-      this.pokemon = fetchPokemon(id);
+    getUserPokemon(id, level) {
+      fetchPokemon(id)
+        .then((response) => {
+          this.userPokemon = response
+          this.$set(this.userPokemon, 'level', level)
+        })
+    },
+    getCpuPokemon(id, level) {
+      fetchPokemon(id)
+        .then((response) => {
+          this.cpuPokemon = response
+          this.$set(this.cpuPokemon, 'level', level)
+        })
+    },
+    movesAtLevel(pokemon)  {
+      if (this.userPokemon) {
+        return pokemon.moves.filter((move) => {
+          return move.version_group_details.some((detail) => {
+            return detail.level_learned_at > 0 && detail.level_learned_at <= pokemon.level && detail.version_group.name === 'firered-leafgreen'
+          })
+        })
+      }
     }
   }
 };
@@ -58,7 +80,7 @@ export default {
 
 <style scoped lang="scss">
 .battlefield-wrapper {
-  height: 100vh;
+  height: calc(100vh - 40px);
   border: 20px solid black;
   display: flex;
   flex-direction: column;
@@ -71,7 +93,7 @@ export default {
   );
   background-size: 100% 10px;
   .battlefield {
-    height: calc(100vh - 240px);
+    height: calc(100vh - 272px);
     padding: 2rem 2rem 0 2rem;
   }
 }

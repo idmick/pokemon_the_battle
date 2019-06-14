@@ -24,6 +24,9 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -34,6 +37,9 @@ export default {
 .p-row {
   display: flex;
   width: 100%;
+}
+.wrap {
+  flex-wrap: wrap;
 }
 .p-col {
   display: flex;

@@ -24,9 +24,9 @@ export default {
   position: relative;
   .pokemon {
     position: absolute;
-    bottom: 75px;
+    bottom: 85px;
     z-index: 3;
-    transform: scale(1.5);
+    transform: scale(2);
   }
   .pokemon__surface {
     position: absolute;

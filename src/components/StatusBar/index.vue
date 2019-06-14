@@ -60,7 +60,6 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 100%;
   background-color: #f8faf1;
   border: 2px solid black;
   padding: 0.5rem 1rem;
@@ -77,6 +76,7 @@ export default {
   .status_bar__health {
     display: flex;
     width: 70%;
+    align-items: stretch;
     .status_bar__health--hp {
       background-color: #363636;
       padding: 1px 4px;
@@ -85,18 +85,17 @@ export default {
       color: #c7a245;
     }
     .status_bar__health_bar {
+      display: flex;
       width: 100%;
-      height: 100%;
       position: relative;
       background-color: #4b4b4b;
       border: 1px solid #4b4b4b;
-      border-radius: 0 6px 6px 0;
+      border-radius: 0 10px 10px 0;
       box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
       .status_bar__health_meter {
         display: block;
-        height: 100%;
         border: 1px solid #fff;
-        border-radius: 6px;
+        border-radius: 10px;
         transition: width ease 1.5s;
       }
       .status_bar__health_meter--healthy {
