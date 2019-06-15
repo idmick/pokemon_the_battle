@@ -2,13 +2,32 @@
   <div class="splash_screen">
     <img class="title-img" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/724333/Pokemon.png">
     <h1>THE BATTLE</h1>
-    <button class="btn btn--primary" @click="startGame()">NEW GAME</button>
+    <fish-button class="btn" @click="startGame">start game</fish-button>
+    <fish-select search v-model="selectedPokemon">
+      <fish-option
+        v-for="pokemon in pokemonNames"
+        :key="pokemon"
+        :index="pokemon" :content="pokemon"
+      ></fish-option>
+    </fish-select>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: "SplashScreen",
+  data () {
+    return {
+      selectedPokemon: ''
+    }
+  },
+  computed: {
+     ...mapState([
+      'pokemonNames'
+    ])
+  },
   created: function() {
     window.addEventListener("keydown", this.keydown);
   },

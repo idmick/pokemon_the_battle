@@ -14,7 +14,7 @@
         </div>
         <div class="p-row half-height">
           <div class="p-col p-col--6 justfied-center aligned-center menu__button">PKMN</div>
-          <div class="p-col p-col--6 justfied-center aligned-center menu__button">RUN</div>
+          <div class="p-col p-col--6 justfied-center aligned-center menu__button" @click="close">RUN</div>
         </div>
       </div>
       <div v-if="fight" class="toolbar__menu toolbar__menu--fight">
@@ -46,6 +46,11 @@ export default {
   computed: {
     randomMoves() {
       return this.moves.sort(() => 0.5 - Math.random()).slice(0, 4)
+    }
+  },
+  methods: {
+    close() {
+      this.$emit('close')
     }
   }
 };

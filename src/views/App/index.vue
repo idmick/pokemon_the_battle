@@ -1,13 +1,14 @@
 <template>
   <div id="app">
-    <splash-screen v-if="!gameIsRunning" @startGame="gameIsRunning = !gameIsRunning"></splash-screen>
-    <battle-field v-else>{{gameIsRunning}}</battle-field>
+    <router-view></router-view>
+    <!-- <splash-screen v-if="!gameIsRunning" @startGame="gameIsRunning = !gameIsRunning"></splash-screen> -->
+    <!-- <battle-field v-else>{{gameIsRunning}}</battle-field> -->
   </div>
 </template>
 
 <script>
-import SplashScreen from "@/components/SplashScreen/index.vue";
-import BattleField from "@/components/BattleField/index.vue";
+// import SplashScreen from "@/components/SplashScreen/index.vue";
+// import BattleField from "@/components/BattleField/index.vue";
 
 export default {
   name: "App",
@@ -16,9 +17,17 @@ export default {
       gameIsRunning: false
     };
   },
+  created() { 
+      this.fetchPokemon(1)
+  },
+  methods: {
+    fetchPokemon (id) {
+      this.$store.dispatch('fetchPokemon', { id })
+    }
+  },
   components: {
-    SplashScreen,
-    BattleField
+    // SplashScreen,
+    // BattleField
   }
 };
 </script>
@@ -35,19 +44,18 @@ body {
   color: #2c3e50;
 }
 .btn {
-  background-color: #27938E;
-  border: none;
-  border-radius: 30px;
-  padding: .75rem 2rem;
-  color: #fff;
-  font-weight: 600;
-  letter-spacing: 2px;
-  border: 5px solid #216573;
-  cursor: pointer;
-  transition: background-color .4s ease;
+  background-color: #27938E !important;
+  border-radius: 30px !important;
+  padding: .75rem 2rem !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  letter-spacing: 2px !important;
+  border: 5px solid #216573 !important;
+  text-transform: uppercase !important;
+  transition: background-color .4s ease !important;
 }
 .btn:hover {
-  background-color: #216573;
+  background-color: #216573 !important;
 }
 .p-row {
   display: flex;
