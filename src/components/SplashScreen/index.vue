@@ -2,7 +2,7 @@
   <div class="splash_screen">
     <img class="title-img" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/724333/Pokemon.png">
     <h1>THE BATTLE</h1>
-    <button class="btn btn-primary btn-lg" @click="startGame()">NEW GAME</button>
+    <button class="btn btn--primary" @click="startGame()">NEW GAME</button>
   </div>
 </template>
 

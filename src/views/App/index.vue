@@ -34,6 +34,21 @@ body {
   text-align: center;
   color: #2c3e50;
 }
+.btn {
+  background-color: #27938E;
+  border: none;
+  border-radius: 30px;
+  padding: .75rem 2rem;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 2px;
+  border: 5px solid #216573;
+  cursor: pointer;
+  transition: background-color .4s ease;
+}
+.btn:hover {
+  background-color: #216573;
+}
 .p-row {
   display: flex;
   width: 100%;
