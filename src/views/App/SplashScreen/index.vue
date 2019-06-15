@@ -2,14 +2,15 @@
   <div class="splash_screen">
     <img class="title-img" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/724333/Pokemon.png">
     <h1>THE BATTLE</h1>
-    <fish-button class="btn" @click="startGame">start game</fish-button>
-    <fish-select search v-model="selectedPokemon">
+    <p class="instruction_text">Select your Pokemon:</p>
+    <fish-select search v-model="selectedPokemon" class="select">
       <fish-option
         v-for="pokemon in pokemonNames"
         :key="pokemon"
         :index="pokemon" :content="pokemon"
       ></fish-option>
     </fish-select>
+    <fish-button :dsiabled="!selectedPokemon" class="btn" :class="{'btn--disabled': !selectedPokemon}" @click="startGame">start game</fish-button>
   </div>
 </template>
 
@@ -67,6 +68,17 @@ export default {
 .title-img {
   width: 50%;
   display: block;
+}
+.instruction_text {
+  color: #fff;
+  font-size: 1.5rem;
+  text-shadow: 1px 1px rgba(0,0,0,0.75)
+}
+.select {
+  border: 5px solid #216573 !important;
+  border-radius: 30px !important;
+  margin-bottom: 2rem;
+  max-width: 40%;
 }
 h1 {
   font-weight: 900;

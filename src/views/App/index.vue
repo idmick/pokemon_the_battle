@@ -52,10 +52,16 @@ body {
   letter-spacing: 2px !important;
   border: 5px solid #216573 !important;
   text-transform: uppercase !important;
-  transition: background-color .4s ease !important;
+  transition: all .4s ease !important;
 }
 .btn:hover {
   background-color: #216573 !important;
+}
+.btn--disabled {
+  background-color: #e9e9e9 !important;
+  border: 5px solid #d9d9d9 !important;
+  color: #c9c9c9 !important;
+  pointer-events: none;
 }
 .p-row {
   display: flex;
