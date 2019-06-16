@@ -3,7 +3,12 @@
     <img class="title-img" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/724333/Pokemon.png">
     <h1>THE BATTLE</h1>
     <p class="instruction_text">Select your Pokemon:</p>
-    <fish-select search v-model="selectedPokemon" class="select">
+    <fish-select 
+      search 
+      v-model="selectedPokemon"
+      class="select"
+      :autocomplete="true"
+    >
       <fish-option
         v-for="pokemon in pokemonNames"
         :key="pokemon"
@@ -15,7 +20,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: "SplashScreen",
@@ -36,12 +41,18 @@ export default {
     window.removeEventListener("keydown", this.keydown);
   },
   methods: {
+    ...mapActions([
+      'fetchPokemon'
+    ]),
     keydown(e) {
       if (e.code === "Space" || e.code === "Enter") {
         this.startGame();
       }
     },
     startGame() {
+      console.log(this.selectedPokemon.toLowerCase())
+      this.fetchPokemon({ id: this.selectedPokemon.toLowerCase() })
+      // this.$store.dispatch('fetchPokemon', { id: this.selectedPokemon.toLowerCase() })
       this.$emit("startGame");
     }
   }

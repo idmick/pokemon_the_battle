@@ -18,7 +18,7 @@ export default {
     };
   },
   created() { 
-      this.fetchPokemon(1)
+      // this.fetchPokemon(1)
   },
   methods: {
     fetchPokemon (id) {
